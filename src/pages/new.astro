@@ -127,11 +127,19 @@ import Layout from '../layouts/Layout.astro'
 	}
 
 	nav {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		transform: translateY(-10rem);
+
 		display: flex;
 		justify-content: space-between;
 
 		font-size: 2.5rem;
 		text-transform: uppercase;
+
+		padding: 2rem;
 	}
 
 	.header {
@@ -140,10 +148,16 @@ import Layout from '../layouts/Layout.astro'
 		left: 50%;
 		transform: translate(-50%, -50%);
 
-		font-size: 10rem;
+		font-size: 12svw;
 		font-weight: normal;
 		letter-spacing: 2rem;
 		text-transform: uppercase;
+		clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+	}
+
+	.header > span {
+		position: relative;
+		top: 60svh;
 	}
 
 	.hide {
@@ -163,6 +177,7 @@ import Layout from '../layouts/Layout.astro'
 	animateDigit(digit3, 5, 1)
 	animateProgressBar()
 	animateBackgroundImages()
+	animateContent()
 
 	function animateDigit(
 		digitGrp: HTMLDivElement | null,
@@ -217,6 +232,23 @@ import Layout from '../layouts/Layout.astro'
 			duration: 3,
 			ease: 'power3.inOut',
 			delay: 9,
+		})
+	}
+
+	function animateContent() {
+		gsap.to('nav', {
+			y: 0,
+			duration: 1,
+			ease: 'power3.out',
+			delay: 11,
+		})
+
+		gsap.to('.header span', {
+			top: '0px',
+			stagger: 0.1,
+			duration: 1,
+			ease: 'power3.out',
+			delay: 11,
 		})
 	}
 </script>
