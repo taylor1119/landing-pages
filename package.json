@@ -1,5 +1,5 @@
 {
-	"name": "photographer-landing-page",
+	"name": "landing-pages",
 	"type": "module",
 	"version": "0.0.1",
 	"scripts": {
@@ -17,6 +17,10 @@
 		"typescript": "^5.5.4"
 	},
 	"devDependencies": {
+		"@typescript-eslint/parser": "^8.4.0",
+		"eslint": "^9.9.1",
+		"eslint-plugin-astro": "^1.2.3",
+		"eslint-plugin-jsx-a11y": "^6.10.0",
 		"prettier": "^3.3.3",
 		"prettier-plugin-astro": "^0.14.1"
 	}
