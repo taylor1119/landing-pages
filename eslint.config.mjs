@@ -8,4 +8,7 @@ export default [
 	...astro.configs.recommended,
 	...astro.configs['jsx-a11y-recommended'],
 	prettier,
+	{
+		rules: { 'astro/jsx-a11y/anchor-is-valid': 'off' },
+	},
 ]

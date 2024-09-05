@@ -1,0 +1,153 @@
+---
+import Layout from '@/layouts/Layout.astro'
+
+import JeanPhilippeDelberghe1 from '@public/furniture-store/imgs/jean-philippe-delberghe-1.jpg'
+import JeanPhilippeDelberghe2 from '@public/furniture-store/imgs/jean-philippe-delberghe-2.jpg'
+import JeanPhilippeDelberghe3 from '@public/furniture-store/imgs/jean-philippe-delberghe-3.jpg'
+import JeanPhilippeDelberghe4 from '@public/furniture-store/imgs/jean-philippe-delberghe-4.jpg'
+import JeanPhilippeDelberghe5 from '@public/furniture-store/imgs/jean-philippe-delberghe-5.jpg'
+import JeanPhilippeDelberghe6 from '@public/furniture-store/imgs/jean-philippe-delberghe-6.jpg'
+import JeanPhilippeDelberghe7 from '@public/furniture-store/imgs/jean-philippe-delberghe-7.jpg'
+import { Image } from 'astro:assets'
+
+const IMAGES = [
+	{ src: JeanPhilippeDelberghe1, alt: 'jean philippe delberghe 1' },
+	{ src: JeanPhilippeDelberghe2, alt: 'jean philippe delberghe 2' },
+	{ src: JeanPhilippeDelberghe3, alt: 'jean philippe delberghe 3' },
+	{ src: JeanPhilippeDelberghe4, alt: 'jean philippe delberghe 4' },
+	{ src: JeanPhilippeDelberghe5, alt: 'jean philippe delberghe 5' },
+	{ src: JeanPhilippeDelberghe6, alt: 'jean philippe delberghe 6' },
+	{ src: JeanPhilippeDelberghe7, alt: 'jean philippe delberghe 7' },
+]
+---
+
+<Layout title='Furniture Store' description='Furniture Store landing page'>
+	<nav class='fixed left-0 top-0 flex w-full justify-between p-4'>
+		<a href='#' class='nav-item w-14 font-bold opacity-0'>Logo</a>
+
+		<div class='nav-item flex gap-x-4 opacity-0'>
+			<a href='#'>Home</a>
+			<a href='#'>Info</a>
+			<a href='#'>Products</a>
+			<a href='#'>Shop</a>
+		</div>
+
+		<a href='#' class='nav-item w-14 opacity-0'>Contact</a>
+	</nav>
+
+	<div class='flex h-svh w-svw overflow-hidden pt-20'>
+		<div class='flex flex-[2]'>
+			{
+				IMAGES.slice(0, 3).map((props) => (
+					<div class='flex-1 space-y-2'>
+						<div class='px-2 text-sm font-semibold poly-rect'>
+							<div class='img-title translate-y-2 opacity-0'>
+								<h1>Lorem ipsum dolor</h1>
+								<h2>Lorem ipsum dolor</h2>
+							</div>
+						</div>
+						<Image
+							{...props}
+							loading='eager'
+							class='side-img object-cover poly-hidden'
+						/>
+					</div>
+				))
+			}
+		</div>
+
+		<div class='flex-1 space-y-2'>
+			<div class='px-2 text-sm font-semibold poly-rect'>
+				<div class='img-title translate-y-2 opacity-0'>
+					<h1>Lorem ipsum dolor</h1>
+					<h2>Lorem ipsum dolor</h2>
+				</div>
+			</div>
+			<Image
+				{...IMAGES[3]}
+				loading='eager'
+				class='main-img scale-50 object-cover poly-hidden-2'
+			/>
+		</div>
+
+		<div class='flex flex-[2]'>
+			{
+				IMAGES.slice(4).map((props) => (
+					<div class='flex-1 space-y-2'>
+						<div class='px-2 text-sm font-semibold poly-rect'>
+							<div class='img-title translate-y-2 opacity-0'>
+								<h1>Lorem ipsum dolor</h1>
+								<h2>Lorem ipsum dolor</h2>
+							</div>
+						</div>
+						<Image
+							{...props}
+							loading='eager'
+							class='side-img object-cover poly-hidden'
+						/>
+					</div>
+				))
+			}
+		</div>
+	</div>
+
+	<div
+		class='header absolute bottom-1/2 right-1/2 flex translate-x-1/2 translate-y-1/2 gap-x-4 overflow-hidden text-6xl'
+	>
+		<div class='header-left relative flex gap-x-2 poly-rect'>
+			{
+				'EAST'
+					.split('')
+					.map((letter) => (
+						<div class='letter translate-y-14'>{letter}</div>
+					))
+			}
+		</div>
+		<div class='header-right relative flex gap-x-2 poly-rect'>
+			{
+				'WOOD'
+					.split('')
+					.map((letter) => (
+						<div class='letter translate-y-14'>{letter}</div>
+					))
+			}
+		</div>
+	</div>
+</Layout>
+
+<script>
+	import gsap from 'gsap'
+
+	const tl = gsap.timeline({
+		defaults: { duration: 1, ease: 'power3.out' },
+		delay: 0.5,
+	})
+
+	tl.to('.letter', {
+		y: 0,
+		stagger: 0.1,
+	})
+		.to('.header', { columnGap: '20svw' })
+		.to(
+			'.main-img',
+			{
+				clipPath: 'polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)',
+			},
+			'<'
+		)
+		.to('.header-left', { fontSize: '12svw' })
+		.to('.header-right', { fontSize: '12svw' }, '<')
+		.to('.header', { columnGap: '4rem' }, '<')
+		.to('.main-img', { scale: 1 }, '<')
+		.to(
+			'.side-img',
+			{
+				clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
+				stagger: 0.1,
+			},
+			'<'
+		)
+		.to('.header', { y: 0, x: '50%', bottom: 0 }, '<')
+		.to('.img-title', { y: 0, opacity: 1, stagger: 0.1 }, '<')
+		.to('.nav-item', { opacity: 1, stagger: 0.2, delay: 0.5 }, '<')
+</script>
