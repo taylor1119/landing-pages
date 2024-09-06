@@ -23,16 +23,16 @@ const IMAGES = [
 
 <Layout title='Furniture Store' description='Furniture Store landing page'>
 	<nav class='fixed left-0 top-0 flex w-full justify-between p-4'>
-		<a href='#' class='nav-item w-14 font-bold opacity-0'>Logo</a>
+		<a href='/' class='nav-item w-14 font-bold opacity-0'>Logo</a>
 
 		<div class='nav-item flex gap-x-4 opacity-0'>
-			<a href='#'>Home</a>
-			<a href='#'>Info</a>
-			<a href='#'>Products</a>
-			<a href='#'>Shop</a>
+			<a href='/'>Home</a>
+			<a href='/'>Info</a>
+			<a href='/'>Products</a>
+			<a href='/'>Shop</a>
 		</div>
 
-		<a href='#' class='nav-item w-14 opacity-0'>Contact</a>
+		<a href='/' class='nav-item w-14 opacity-0'>Contact</a>
 	</nav>
 
 	<div class='flex h-svh w-svw overflow-hidden pt-20'>
@@ -40,7 +40,7 @@ const IMAGES = [
 			{
 				IMAGES.slice(0, 3).map((props) => (
 					<div class='flex-1 space-y-2'>
-						<div class='px-2 text-sm font-semibold poly-rect'>
+						<div class='px-2 text-sm font-semibold'>
 							<div class='img-title translate-y-2 opacity-0'>
 								<h1>Lorem ipsum dolor</h1>
 								<h2>Lorem ipsum dolor</h2>
@@ -49,7 +49,7 @@ const IMAGES = [
 						<Image
 							{...props}
 							loading='eager'
-							class='side-img object-cover poly-hidden'
+							class='side-img poly-hidden-top object-cover'
 						/>
 					</div>
 				))
@@ -57,7 +57,7 @@ const IMAGES = [
 		</div>
 
 		<div class='flex-1 space-y-2'>
-			<div class='px-2 text-sm font-semibold poly-rect'>
+			<div class='px-2 text-sm font-semibold'>
 				<div class='img-title translate-y-2 opacity-0'>
 					<h1>Lorem ipsum dolor</h1>
 					<h2>Lorem ipsum dolor</h2>
@@ -66,7 +66,7 @@ const IMAGES = [
 			<Image
 				{...IMAGES[3]}
 				loading='eager'
-				class='main-img scale-50 object-cover poly-hidden-2'
+				class='main-img poly-hidden-center scale-50 object-cover'
 			/>
 		</div>
 
@@ -74,7 +74,7 @@ const IMAGES = [
 			{
 				IMAGES.slice(4).map((props) => (
 					<div class='flex-1 space-y-2'>
-						<div class='px-2 text-sm font-semibold poly-rect'>
+						<div class='px-2 text-sm font-semibold'>
 							<div class='img-title translate-y-2 opacity-0'>
 								<h1>Lorem ipsum dolor</h1>
 								<h2>Lorem ipsum dolor</h2>
@@ -83,7 +83,7 @@ const IMAGES = [
 						<Image
 							{...props}
 							loading='eager'
-							class='side-img object-cover poly-hidden'
+							class='side-img poly-hidden-top object-cover'
 						/>
 					</div>
 				))
@@ -94,7 +94,7 @@ const IMAGES = [
 	<div
 		class='header absolute bottom-1/2 right-1/2 flex translate-x-1/2 translate-y-1/2 gap-x-4 overflow-hidden text-6xl'
 	>
-		<div class='header-left relative flex gap-x-2 poly-rect'>
+		<div class='header-left relative flex gap-x-2'>
 			{
 				'EAST'
 					.split('')
@@ -103,7 +103,7 @@ const IMAGES = [
 					))
 			}
 		</div>
-		<div class='header-right relative flex gap-x-2 poly-rect'>
+		<div class='header-right relative flex gap-x-2'>
 			{
 				'WOOD'
 					.split('')
@@ -130,9 +130,7 @@ const IMAGES = [
 		.to('.header', { columnGap: '20svw' })
 		.to(
 			'.main-img',
-			{
-				clipPath: 'polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)',
-			},
+			{ clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)' },
 			'<'
 		)
 		.to('.header-left', { fontSize: '12svw' })

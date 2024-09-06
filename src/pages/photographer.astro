@@ -1,6 +1,6 @@
 ---
-import { Image } from 'astro:assets'
 import Layout from '@/layouts/Layout.astro'
+import { Image } from 'astro:assets'
 
 import alinaLevkovich1 from '@public/photographer/imgs/alina-levkovich-1.jpg'
 import alinaLevkovich2 from '@public/photographer/imgs/alina-levkovich-2.jpg'
@@ -21,38 +21,46 @@ const IMAGES = [
 ] as const
 ---
 
-<Layout title='Photographer' description='Photographer landing page'>
-	<div class='loader'>
-		<div class='counter'>
-			<div class='digit-1'>
-				<div class='num'>0</div>
-				<div class='num'>1</div>
+<Layout
+	title='Photographer'
+	description='Photographer landing page'
+	class='h-svh overflow-hidden bg-yellow-500 text-slate-800'
+>
+	<div
+		id='loader'
+		class='fixed bottom-0 right-0 flex h-[9rem] w-[150%] justify-end gap-x-4 overflow-hidden pb-4 pr-8'
+	>
+		<div class='flex text-right text-8xl leading-normal'>
+			<div id='digit1'>
+				<div>0</div>
+				<div>1</div>
 			</div>
 
-			<div class='digit-2'>
+			<div id='digit2'>
 				{
 					Array.from({ length: 11 }).map((_, i) => (
-						<div class='num'>{i === 10 ? 0 : i}</div>
+						<div>{i === 10 ? 0 : i}</div>
 					))
 				}
 			</div>
 
-			<div class='digit-3'>
+			<div id='digit3'>
 				{
 					Array.from({ length: 11 }).map((_, i) => (
-						<div class='num'>{i === 10 ? 0 : i}</div>
+						<div>{i === 10 ? 0 : i}</div>
 					))
 				}
 			</div>
 
-			<div class='percent'>%</div>
+			<div>%</div>
 		</div>
 
-		<div class='progress-bar'></div>
+		<div id='progress-bar' class='h-2 self-end rounded-lg bg-slate-800'>
+		</div>
 	</div>
 
-	<div class='background-images-container'>
-		<div class='background-images'>
+	<div id='bgs-container' class='fixed left-0 top-0 -z-10 size-full p-16'>
+		<div class='relative size-full'>
 			{
 				IMAGES.map((props) => (
 					<Image
@@ -60,24 +68,93 @@ const IMAGES = [
 						width={1920}
 						height={1080}
 						loading='eager'
+						class='poly-hidden-right absolute size-full object-cover'
 					/>
 				))
 			}
 		</div>
 	</div>
 
-	<div class='content'>
-		<nav>
-			<div class='logo'><p>Logo</p></div>
-			<div class='job-title'><p>Photographer</p></div>
-			<div class='menu'><p>Menu</p></div>
-		</nav>
+	<nav
+		id='top-bar'
+		class='fixed left-0 top-0 flex w-full -translate-y-24 justify-between p-4 text-4xl text-yellow-500'
+	>
+		<a href='/'>Logo</a>
+		<p>[ Photographer ]</p>
+		<a href='/'>Menu</a>
+	</nav>
 
-		<h1 class='header'>
-			{'RIYADH'.split('').map((letter) => <span>{letter}</span>)}
-		</h1>
-	</div>
+	<h1
+		id='title'
+		class='absolute bottom-1/2 right-1/2 translate-x-1/2 translate-y-1/2 overflow-hidden text-9xl tracking-[2rem] text-yellow-500'
+	>
+		{
+			'RIYADH'
+				.split('')
+				.map((letter) => <span class='relative top-32'>{letter}</span>)
+		}
+	</h1>
 </Layout>
+
+<script>
+	import gsap from 'gsap'
+
+	const tl = gsap.timeline()
+
+	tl.to('#digit3', { y: '-90rem', duration: 5 })
+		.to('#digit2', { y: '-90rem', duration: 6 }, '<')
+		.to('#digit1', { y: '-9rem', duration: 2, delay: 4 }, '<')
+		.to('#progress-bar', {
+			width: '30%',
+			ease: 'power4.inOut',
+			duration: 2,
+		})
+		.to('#progress-bar', {
+			width: '100%',
+			opacity: 0,
+
+			ease: 'power3.out',
+			duration: 2,
+			onComplete: () => {
+				document.querySelector('#loader')?.remove()
+			},
+		})
+		.to(
+			'#bgs-container',
+			{
+				scale: 1.25,
+				ease: 'power3.inOut',
+				duration: 3,
+				delay: 0.5,
+			},
+			'<'
+		)
+		.to(
+			'#bgs-container img',
+			{
+				clipPath: 'polygon(100% 0%, 0% 0%, 0% 100%, 100% 100%)',
+				ease: 'power4.inOut',
+				duration: 1,
+				stagger: 0.25,
+			},
+			'<'
+		)
+		.to('#top-bar', {
+			y: 0,
+			ease: 'power3.out',
+			duration: 1,
+		})
+		.to(
+			'#title span',
+			{
+				top: 0,
+				ease: 'power3.out',
+				duration: 1,
+				stagger: 0.1,
+			},
+			'<'
+		)
+</script>
 
 <style>
 	@font-face {
@@ -107,214 +184,7 @@ const IMAGES = [
 		font-display: swap;
 	}
 
-	* {
-		margin: 0;
-		padding: 0;
-		box-sizing: border-box;
-	}
-
 	body {
-		height: 100svh;
-		width: 100svw;
-		overflow: hidden;
-		color: #212121;
-		background-color: #ffc107;
-
 		font-family: 'Playfair Display', serif;
 	}
-
-	.loader {
-		position: fixed;
-		bottom: 0rem;
-		right: 0rem;
-
-		width: 200%;
-		padding-right: 3rem;
-		padding-bottom: 1rem;
-
-		display: flex;
-		align-items: end;
-		justify-content: end;
-
-		z-index: 10;
-	}
-
-	.counter {
-		display: flex;
-
-		font-size: 6rem;
-		height: 8rem;
-		text-align: right;
-		clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
-	}
-
-	.progress-bar {
-		width: 0;
-		height: 0.5rem;
-		border-radius: 1.5rem;
-		margin-bottom: 0.75rem;
-		background-color: #212121;
-	}
-
-	.background-images-container {
-		position: fixed;
-		top: 0;
-		left: 0;
-
-		width: 100svw;
-		height: 100svh;
-		padding: 4rem;
-
-		z-index: -10;
-	}
-
-	.background-images {
-		position: relative;
-		top: 0;
-		left: 0;
-
-		width: 100%;
-		height: 100%;
-	}
-
-	.background-images img {
-		position: absolute;
-		width: 100%;
-		height: 100%;
-		object-fit: cover;
-		clip-path: polygon(100% 0%, 100% 0%, 100% 100%, 100% 100%);
-	}
-
-	.content {
-		padding: 2rem;
-		color: #ffc107;
-		font-size: 2.5rem;
-	}
-
-	nav {
-		position: fixed;
-		top: 0;
-		left: 0;
-		transform: translateY(-10rem);
-
-		width: 100%;
-		padding: 2rem;
-
-		display: flex;
-		justify-content: space-between;
-
-		font-size: 2.5rem;
-		text-transform: uppercase;
-	}
-
-	.header {
-		position: absolute;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);
-
-		font-size: 12svw;
-		font-weight: normal;
-		letter-spacing: 2rem;
-		text-transform: uppercase;
-
-		clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
-	}
-
-	.header > span {
-		position: relative;
-		top: 60svh;
-	}
-
-	.hide {
-		display: none;
-	}
 </style>
-
-<script>
-	import gsap from 'gsap'
-
-	const digit1 = document.querySelector<HTMLDivElement>('.digit-1')
-	const digit2 = document.querySelector<HTMLDivElement>('.digit-2')
-	const digit3 = document.querySelector<HTMLDivElement>('.digit-3')
-
-	animateDigit(digit1, 2, 5)
-	animateDigit(digit2, 6, 1)
-	animateDigit(digit3, 5, 1)
-	animateProgressBar()
-	animateBackgroundImages()
-	animateContent()
-
-	function animateDigit(
-		digitGrp: HTMLDivElement | null,
-		duration: number,
-		delay: number
-	) {
-		if (!digitGrp) return
-
-		const digitHeight = digitGrp.querySelector('.num')?.clientHeight ?? 0
-		const digitColHeight =
-			(digitGrp.querySelectorAll('.num').length - 1) * digitHeight
-
-		gsap.to(digitGrp, {
-			y: -digitColHeight,
-			duration,
-			delay,
-			ease: 'power2.inOut',
-		})
-	}
-
-	function animateProgressBar() {
-		gsap.to('.progress-bar', {
-			width: '30%',
-			duration: 2,
-			ease: 'power4.inOut',
-			delay: 7,
-		})
-
-		gsap.to('.progress-bar', {
-			width: '100%',
-			opacity: 0,
-			duration: 2,
-			delay: 8.5,
-			ease: 'power3.out',
-			onComplete: () => {
-				document.querySelector('.loader')?.remove()
-			},
-		})
-	}
-
-	function animateBackgroundImages() {
-		gsap.to('.background-images > img', {
-			clipPath: 'polygon(100% 0%, 0% 0%, 0% 100%, 100% 100%)',
-			duration: 1,
-			ease: 'power4.inOut',
-			stagger: 0.25,
-			delay: 9,
-		})
-
-		gsap.to('.background-images', {
-			scale: 1.25,
-			duration: 3,
-			ease: 'power3.inOut',
-			delay: 9,
-		})
-	}
-
-	function animateContent() {
-		gsap.to('nav', {
-			y: 0,
-			duration: 1,
-			ease: 'power3.out',
-			delay: 11,
-		})
-
-		gsap.to('.header span', {
-			top: '0px',
-			stagger: 0.1,
-			duration: 1,
-			ease: 'power3.out',
-			delay: 11,
-		})
-	}
-</script>

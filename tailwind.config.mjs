@@ -10,14 +10,14 @@ export default {
 	plugins: [
 		plugin(({ addUtilities }) => {
 			addUtilities({
-				'.poly-rect': {
-					clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
-				},
-				'.poly-hidden': {
+				'.poly-hidden-top': {
 					clipPath: 'polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)',
 				},
-				'.poly-hidden-2': {
+				'.poly-hidden-center': {
 					clipPath: 'polygon(50% 50%, 50% 50%, 50% 50%, 50% 50%)',
+				},
+				'.poly-hidden-right': {
+					clipPath: 'polygon(100% 0%, 100% 0%, 100% 100%, 100% 100%)',
 				},
 			})
 		}),
