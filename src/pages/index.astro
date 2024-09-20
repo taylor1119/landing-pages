@@ -1,17 +1,56 @@
 ---
 import Layout from '../layouts/Layout.astro'
+
+import landingPage1 from '@public/imgs/1.png'
+import landingPage2 from '@public/imgs/2.png'
+import landingPage3 from '@public/imgs/3.png'
+import landingPage4 from '@public/imgs/4.png'
+import { Image } from 'astro:assets'
+
+const LANDING_PAGES = [
+	{
+		img: landingPage1,
+		alt: 'landing page 1',
+		href: '/1',
+	},
+	{
+		img: landingPage2,
+		alt: 'landing page 2',
+		href: '/2',
+	},
+	{
+		img: landingPage3,
+		alt: 'landing page 3',
+		href: '/3',
+	},
+	{
+		img: landingPage4,
+		alt: 'landing page 4',
+		href: '/4',
+	},
+] as const
 ---
 
 <Layout
 	title='Landing Pages'
 	description='A collection of beautifully animated landing pages'
 >
-	<main class='h-svh w-full bg-amber-300 p-8'>
-		<ul class='list-inside list-disc text-lg font-semibold text-slate-700'>
-			<li><a href='/photography-1'>Photography one</a></li>
-			<li><a href='/photography-2'>Photography two</a></li>
-			<li><a href='/furniture-store'>Furniture Store</a></li>
-			<li><a href='/portfolio'>Portfolio</a></li>
+	<main class='bg-slate-800'>
+		<ul class='grid h-svh grid-cols-2 grid-rows-2'>
+			{
+				LANDING_PAGES.map((landingPage) => (
+					<li class='border border-black opacity-50 transition-opacity hover:opacity-100'>
+						<a href={landingPage.href} aria-label={landingPage.alt}>
+							<Image
+								src={landingPage.img}
+								alt={landingPage.alt}
+								loading='eager'
+								class='size-full object-cover'
+							/>
+						</a>
+					</li>
+				))
+			}
 		</ul>
 	</main>
 </Layout>

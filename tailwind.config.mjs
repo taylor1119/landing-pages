@@ -5,6 +5,10 @@ import plugin from 'tailwindcss/plugin'
 export default {
 	content: ['./src/**/*.{astro,html}'],
 	theme: {
+		fontFamily: {
+			sans: ['Nunito', 'sans-serif'],
+			serif: ['Playfair Display', 'serif'],
+		},
 		extend: {},
 	},
 	plugins: [

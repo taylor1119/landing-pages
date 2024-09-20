@@ -1,0 +1,102 @@
+---
+import Layout from '@/layouts/Layout.astro'
+---
+
+<Layout
+	title='Portfolio'
+	description='Portfolio'
+	class='flex h-svh flex-col bg-stone-400 p-8 text-stone-800'
+>
+	<div class='row flex justify-between overflow-hidden font-serif text-8xl'>
+		<p class='translate-y-24'>Riyadh</p>
+		<p class='translate-y-24'>Baatchia</p>
+	</div>
+
+	<div class='line h-px w-0 bg-stone-800'></div>
+
+	<div
+		id='sub-titles'
+		class='flex justify-between font-medium [&>p]:-translate-y-16 [&>p]:opacity-0'
+	>
+		<p>full-stack developer</p>
+		<p>available for hire</p>
+		<p>email</p>
+		<p>setif, algeria</p>
+	</div>
+
+	<div class='grow'></div>
+
+	<div class='row flex items-end justify-between overflow-hidden'>
+		<a
+			href='https://riyadh-dev.github.io/portfolio/#about'
+			class='mb-2 ml-2 flex h-28 w-60 translate-y-32 items-end justify-between rounded-br-3xl bg-stone-300 px-4 py-2 font-semibold opacity-0'
+		>
+			<p>About</p>
+			<p>01</p>
+		</a>
+
+		<p class='translate-y-32 font-serif text-8xl'>English</p>
+
+		<a
+			href='https://riyadh-dev.github.io/portfolio/#projects'
+			class='ont-semibold mb-2 flex h-28 w-60 translate-y-32 items-end justify-between rounded-br-3xl bg-pink-800 px-4 py-2 text-white opacity-0'
+		>
+			<p>Projects</p>
+			<p>02</p>
+		</a>
+	</div>
+
+	<div class='line h-px w-0 bg-stone-800'></div>
+
+	<div
+		class='row flex justify-between overflow-hidden pt-14 font-serif text-8xl [&>p]:translate-y-24'
+	>
+		<p>Fullstack</p>
+		<p>Developer</p>
+	</div>
+
+	<div class='line h-px w-0 bg-stone-800'></div>
+
+	<div class='row flex items-end justify-between overflow-hidden pt-14'>
+		<p class='translate-y-32 font-serif text-8xl'>Based</p>
+
+		<a
+			href='https://riyadh-dev.github.io/portfolio/#contact'
+			class='mb-2 mr-2 flex h-28 w-60 translate-y-32 items-end justify-between rounded-br-3xl bg-yellow-600 px-4 py-2 font-semibold opacity-0'
+		>
+			<p>Contact</p>
+			<p>03</p>
+		</a>
+
+		<p class='translate-y-32 font-serif text-8xl'>in Algeria</p>
+	</div>
+
+	<div class='line h-px w-0 bg-stone-800'></div>
+</Layout>
+
+<script>
+	import gsap from 'gsap'
+
+	const tl = gsap.timeline({
+		delay: 0.5,
+		defaults: { duration: 1.4, ease: 'power4.out' },
+	})
+
+	tl.to('#sub-titles p', {
+		y: 0,
+		opacity: 1,
+		stagger: 0.2,
+	})
+		.to(
+			'.line',
+			{
+				width: '100%',
+				delay: 0.6,
+				stagger: 0.2,
+			},
+			'<'
+		)
+		.to('.row > p', { y: 0, delay: 0.4, stagger: 0.1 }, '<')
+		.to('.row > a', { y: 0, opacity: 1, delay: 0.2, stagger: 0.1 }, '<')
+		.to('#back-to-home', { left: '1rem', duration: 1 })
+</script>

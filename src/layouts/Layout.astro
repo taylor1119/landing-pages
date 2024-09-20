@@ -1,6 +1,8 @@
 ---
 import { ViewTransitions } from 'astro:transitions'
 
+import '@/base.css'
+
 interface Props {
 	title: string
 	description: string
@@ -23,6 +25,7 @@ const { title, description, class: className = '' } = Astro.props
 
 		<ViewTransitions />
 	</head>
+
 	<body class={className}>
 		<slot />
 

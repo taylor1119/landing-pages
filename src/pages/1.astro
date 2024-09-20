@@ -1,0 +1,186 @@
+---
+import Layout from '@/layouts/Layout.astro'
+
+import JeanPhilippeDelberghe1 from '@public/1/imgs/jean-philippe-delberghe-1.jpg'
+import JeanPhilippeDelberghe2 from '@public/1/imgs/jean-philippe-delberghe-2.jpg'
+import JeanPhilippeDelberghe3 from '@public/1/imgs/jean-philippe-delberghe-3.jpg'
+import JeanPhilippeDelberghe4 from '@public/1/imgs/jean-philippe-delberghe-4.jpg'
+import JeanPhilippeDelberghe5 from '@public/1/imgs/jean-philippe-delberghe-5.jpg'
+import JeanPhilippeDelberghe6 from '@public/1/imgs/jean-philippe-delberghe-6.jpg'
+import JeanPhilippeDelberghe7 from '@public/1/imgs/jean-philippe-delberghe-7.jpg'
+import { Image } from 'astro:assets'
+
+const IMAGES = [
+	{
+		src: JeanPhilippeDelberghe1,
+		alt: 'jean philippe delberghe 1',
+		clientName: 'Hans Muller',
+	},
+	{
+		src: JeanPhilippeDelberghe2,
+		alt: 'jean philippe delberghe 2',
+		clientName: 'Pierre Dupont',
+	},
+	{
+		src: JeanPhilippeDelberghe3,
+		alt: 'jean philippe delberghe 3',
+		clientName: 'Johannes Schmidt',
+	},
+	{
+		src: JeanPhilippeDelberghe4,
+		alt: 'jean philippe delberghe 4',
+		clientName: 'Francesco Bianchi',
+	},
+	{
+		src: JeanPhilippeDelberghe5,
+		alt: 'jean philippe delberghe 5',
+		clientName: 'Andrzej Kowalski',
+	},
+	{
+		src: JeanPhilippeDelberghe6,
+		alt: 'jean philippe delberghe 6',
+		clientName: 'Juan Sanchez',
+	},
+	{
+		src: JeanPhilippeDelberghe7,
+		alt: 'jean philippe delberghe 7',
+		clientName: 'Luis Silva',
+	},
+]
+---
+
+<Layout
+	title='Furniture Store'
+	description='Furniture Store landing page'
+	class='bg-orange-50'
+>
+	<nav
+		class='fixed left-0 top-0 flex h-20 w-full items-center justify-between px-14 font-bold'
+	>
+		<a href='/' class='nav-item w-64 opacity-0'>3D, Motion, Art Direction</a
+		>
+
+		<div class='nav-item flex gap-x-2 opacity-0'>
+			<a href='/'>Home,</a>
+			<a href='/'>Patron,</a>
+			<a href='/'>Store</a>
+			<a href='/'>Lab</a>
+		</div>
+
+		<a href='/' class='nav-item w-64 text-right underline opacity-0'
+			>Send me a message</a
+		>
+	</nav>
+
+	<div class='flex h-svh w-svw overflow-hidden pt-20 font-semibold'>
+		<div class='flex flex-[2]'>
+			{
+				IMAGES.slice(0, 3).map((item) => (
+					<div class='flex-1 space-y-2'>
+						<div class='img-title translate-y-2 text-right opacity-0'>
+							<h1>{item.clientName}</h1>
+							<h2>[CLIENT WORK]</h2>
+						</div>
+						<Image
+							src={item.src}
+							alt={item.alt}
+							loading='eager'
+							class='side-img object-cover poly-hidden-top'
+						/>
+					</div>
+				))
+			}
+		</div>
+
+		<div class='flex-1 space-y-2'>
+			<div class='img-title translate-y-2 text-center opacity-0'>
+				<h1>{IMAGES[3].clientName}</h1>
+				<h2>[CLIENT WORK]</h2>
+			</div>
+			<Image
+				src={IMAGES[3].src}
+				alt={IMAGES[3].alt}
+				loading='eager'
+				class='main-img scale-50 object-cover poly-hidden-center'
+			/>
+		</div>
+
+		<div class='flex flex-[2]'>
+			{
+				IMAGES.slice(4).map((item) => (
+					<div class='flex-1 space-y-2'>
+						<div class='img-title translate-y-2 text-left opacity-0'>
+							<h1>{item.clientName}</h1>
+							<h2>[CLIENT WORK]</h2>
+						</div>
+						<Image
+							src={item.src}
+							alt={item.alt}
+							loading='eager'
+							class='side-img object-cover poly-hidden-top'
+						/>
+					</div>
+				))
+			}
+		</div>
+	</div>
+
+	<div
+		class='header absolute bottom-1/2 right-1/2 -z-10 flex translate-x-1/2 translate-y-1/2 gap-x-4 overflow-hidden font-serif text-6xl'
+	>
+		<div class='header-left relative flex gap-x-2'>
+			{
+				'EAST'
+					.split('')
+					.map((letter) => (
+						<div class='letter translate-y-14'>{letter}</div>
+					))
+			}
+		</div>
+		<div class='header-right relative flex gap-x-2'>
+			{
+				'WOOD'
+					.split('')
+					.map((letter) => (
+						<div class='letter translate-y-14'>{letter}</div>
+					))
+			}
+		</div>
+	</div>
+</Layout>
+
+<script>
+	import gsap from 'gsap'
+
+	const tl = gsap.timeline({
+		defaults: { duration: 1, ease: 'power3.out' },
+		delay: 0.5,
+	})
+
+	tl.to('.letter', {
+		y: 0,
+		stagger: 0.1,
+	})
+		.to('.header', { columnGap: '20svw' })
+		.to(
+			'.main-img',
+			{ clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)' },
+			'<'
+		)
+		.to('.header-left', { fontSize: '12svw' })
+		.to('.header-right', { fontSize: '12svw' }, '<')
+		.to('.header', { columnGap: '4rem' }, '<')
+		.to('.main-img', { scale: 1 }, '<')
+		.to(
+			'.side-img',
+			{
+				clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
+				stagger: 0.1,
+			},
+			'<'
+		)
+		.to('.header', { y: 0, x: '50%', bottom: 0 }, '<')
+		.to('.img-title', { y: 0, opacity: 1, stagger: 0.1 }, '<')
+		.to('.nav-item', { opacity: 1, stagger: 0.2, delay: 0.5 }, '<')
+		.to('#back-to-home', { left: '1rem', duration: 1 })
+</script>
