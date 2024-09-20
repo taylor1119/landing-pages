@@ -25,5 +25,26 @@ const { title, description, class: className = '' } = Astro.props
 	</head>
 	<body class={className}>
 		<slot />
+
+		<a
+			id='back-to-home'
+			href='/'
+			aria-label='back to home'
+			class='fixed -left-14 bottom-4 flex size-12 items-center justify-center rounded-full bg-slate-900 text-lg font-bold text-white opacity-50 transition-opacity hover:opacity-100'
+			><svg
+				xmlns='http://www.w3.org/2000/svg'
+				width='800'
+				height='800'
+				viewBox='0 0 120 120'
+				class='size-5'
+				><path
+					fill='#fefefe'
+					d='M34.358 43.299l60.033 60.041-16.659 16.65L17.7 59.957z'
+				></path><path
+					fill='#fefefe'
+					d='M17.606 60.067L77.623.011l16.658 16.642L34.256 76.71z'
+				></path></svg
+			></a
+		>
 	</body>
 </html>

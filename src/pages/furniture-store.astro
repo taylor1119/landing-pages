@@ -49,7 +49,7 @@ const IMAGES = [
 						<Image
 							{...props}
 							loading='eager'
-							class='side-img poly-hidden-top object-cover'
+							class='side-img object-cover poly-hidden-top'
 						/>
 					</div>
 				))
@@ -66,7 +66,7 @@ const IMAGES = [
 			<Image
 				{...IMAGES[3]}
 				loading='eager'
-				class='main-img poly-hidden-center scale-50 object-cover'
+				class='main-img scale-50 object-cover poly-hidden-center'
 			/>
 		</div>
 
@@ -83,7 +83,7 @@ const IMAGES = [
 						<Image
 							{...props}
 							loading='eager'
-							class='side-img poly-hidden-top object-cover'
+							class='side-img object-cover poly-hidden-top'
 						/>
 					</div>
 				))
@@ -148,4 +148,5 @@ const IMAGES = [
 		.to('.header', { y: 0, x: '50%', bottom: 0 }, '<')
 		.to('.img-title', { y: 0, opacity: 1, stagger: 0.1 }, '<')
 		.to('.nav-item', { opacity: 1, stagger: 0.2, delay: 0.5 }, '<')
+		.to('#back-to-home', { left: '1rem', duration: 1 })
 </script>

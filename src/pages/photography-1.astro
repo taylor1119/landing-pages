@@ -22,7 +22,7 @@ const IMAGES = [
 ---
 
 <Layout
-	title='Photographer'
+	title='Photography One'
 	description='Photographer landing page'
 	class='h-svh overflow-hidden bg-yellow-500 text-slate-800'
 >
@@ -68,7 +68,7 @@ const IMAGES = [
 						width={1920}
 						height={1080}
 						loading='eager'
-						class='poly-hidden-right absolute size-full object-cover'
+						class='absolute size-full object-cover poly-hidden-right'
 					/>
 				))
 			}
@@ -99,7 +99,7 @@ const IMAGES = [
 <script>
 	import gsap from 'gsap'
 
-	const tl = gsap.timeline()
+	const tl = gsap.timeline({ delay: 0.5 })
 
 	tl.to('#digit3', { y: '-90rem', duration: 5 })
 		.to('#digit2', { y: '-90rem', duration: 6 }, '<')
@@ -154,6 +154,7 @@ const IMAGES = [
 			},
 			'<'
 		)
+		.to('#back-to-home', { left: '1rem', duration: 1 })
 </script>
 
 <style>
