@@ -1,0 +1,202 @@
+---
+import { Image } from 'astro:assets'
+
+import Layout from '@/layouts/Layout.astro'
+
+import nathalieJolie1 from '@public/3/imgs/nathalie-jolie-1.jpg'
+import nathalieJolie2 from '@public/3/imgs/nathalie-jolie-2.jpg'
+---
+
+<Layout
+	title='Photography'
+	description='Photographer landing page'
+	class='relative h-svh overflow-hidden font-semibold'
+>
+	<div
+		id='loader-container'
+		class='fixed inset-0 z-20 grid h-svh place-items-center bg-orange-50'
+	>
+		<div
+			id='loader-wrapper'
+			class='h-36 w-3 rotate-45 scale-75 overflow-hidden rounded bg-stone-300'
+		>
+			<div
+				id='loader'
+				class='h-full w-3 translate-y-36 bg-gradient-to-b from-pink-500 from-50% to-red-500'
+			>
+			</div>
+		</div>
+	</div>
+
+	<div
+		id='loader-title-container'
+		class='fixed inset-0 z-10 grid h-svh place-items-center bg-black text-white'
+	>
+		<h1 class='flex text-xl tracking-widest'>
+			{
+				'RIAD-SOON'
+					.split('')
+					.map((letter) => (
+						<span
+							class:list={[
+								{ 'px-2': letter === '-' },
+								'block translate-x-10 opacity-0',
+							]}
+						>
+							{letter}
+						</span>
+					))
+			}
+		</h1>
+	</div>
+
+	<div
+		id='slider'
+		class='fixed inset-0 z-20 h-svh -translate-x-full bg-stone-400'
+	>
+	</div>
+
+	<Image
+		src={nathalieJolie1}
+		width={1920}
+		height={1080}
+		loading='eager'
+		alt='Nathalie Jolie background'
+		class='fixed inset-0 -z-10 size-full object-cover'
+	/>
+
+	<nav
+		class='z-20 flex h-20 items-center border-b border-stone-400 bg-orange-50 px-12 text-center text-xs'
+	>
+		<div class='flex-1'><a href='/'>STARTING PRESENTATION</a></div>
+		<div class='flex-1'><a href='/'>COLLECTION</a></div>
+		<div class='flex-1 text-base tracking-widest'>
+			<a href='/'>RIAD - SOON &copy;</a>
+		</div>
+		<div class='flex-1'><a href='/'>BRANDING UNIVERSAL</a></div>
+		<div class='flex-1'><a href='/'>CONTACT MODELS</a></div>
+	</nav>
+
+	<div class='flex h-[calc(100svh-5rem)]'>
+		<div
+			id='left-col'
+			class='flex flex-1 -translate-x-full flex-col items-center justify-center gap-y-4 bg-orange-50 text-center'
+		>
+			<h1
+				class='left-col-item -translate-x-20 rounded-lg border border-stone-900 px-4 py-2 text-2xl font-bold opacity-0'
+			>
+				EDITORIAL - 2023
+			</h1>
+
+			<h2 class='left-col-item -translate-x-20 opacity-0'>
+				A NEW COLLECTION OF OUTDOOR PHOTOGRAPHY
+			</h2>
+
+			<Image
+				src={nathalieJolie2}
+				width={400}
+				height={400}
+				loading='eager'
+				alt='Nathalie Jolie center'
+				class='left-col-item size-80 -translate-x-20 rounded-lg object-cover opacity-0'
+			/>
+
+			<p
+				class='left-col-item w-96 -translate-x-20 text-balance font-normal opacity-0'
+			>
+				Lorem ipsum dolor sit amet consectetur adipisicing elit.
+				Impedit, laborum asperiores minima porro optio dicta neque ipsam
+				odio nisi a non natus corrupti sequi beatae quam qui temporibus
+				illo vero.
+			</p>
+
+			<div
+				class='left-col-item flex -translate-x-20 items-center gap-x-4 pt-4 leading-none opacity-0'
+			>
+				<p>CHECK SOCIAL MEDIA</p>
+				<svg
+					height='24px'
+					viewBox='0 -960 960 960'
+					width='24px'
+					fill='black'
+					><path
+						d='M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z'
+					></path></svg
+				>
+				<p>GET STARTED</p>
+			</div>
+		</div>
+
+		<div class='grid flex-1 place-items-center'>
+			<h1
+				id='right-col-title'
+				class='-translate-x-20 text-center font-serif text-8xl font-normal text-orange-50 opacity-0'
+			>
+				EMOTION <br /> FROM THE <br /> PHOTO DAY <br /> NO. 8
+			</h1>
+		</div>
+	</div>
+</Layout>
+
+<script>
+	import gsap from 'gsap'
+
+	const tl = gsap.timeline({
+		delay: 0.5,
+		defaults: { animation: 'power3.inOut' },
+	})
+
+	tl.to('#loader-wrapper', {
+		scale: 1,
+	})
+		.to('#loader', { y: 0, scale: 1, duration: 1.5 }, '<')
+		.to('#loader-wrapper', {
+			scale: 1.5,
+			duration: 1,
+		})
+		.to(
+			'#loader-container',
+			{
+				opacity: 0,
+				duration: 1,
+				onComplete: () => remove('#loader-container'),
+			},
+			'<'
+		)
+		.to('#loader-title-container > h1 > span', {
+			x: 0,
+			opacity: 1,
+			duration: 1.2,
+			stagger: 0.1,
+		})
+		.to('#slider', {
+			x: 0,
+			onComplete: () => remove('#loader-title-container'),
+		})
+		.to('#slider', {
+			x: '100%',
+			delay: 0.2,
+			onComplete: () => remove('#slider'),
+		})
+		.to('#left-col', { x: 0, duration: 1 })
+		.to('.left-col-item', {
+			x: 0,
+			opacity: 1,
+			stagger: 0.2,
+			duration: 1.2,
+		})
+		.to(
+			'#right-col-title',
+			{
+				x: 0,
+				opacity: 1,
+				duration: 1.4,
+			},
+			'<'
+		)
+		.to('#back-to-home', { left: '1rem', duration: 1 })
+
+	function remove(selector: string) {
+		document.querySelector(selector)?.remove()
+	}
+</script>
