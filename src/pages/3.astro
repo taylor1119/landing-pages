@@ -164,8 +164,12 @@ import nathalieJolie2 from '@public/3/imgs/nathalie-jolie-2.jpg'
 				duration: 1.2,
 				stagger: 0.1,
 			})
+			.to('#loader-container', { zIndex: '-30', duration: 0 }, '<')
 			.to('#slider', { x: 0 })
-			.to('#loader-title-container', { opacity: 0, duration: 0 })
+			.to('#loader-title-container', {
+				zIndex: '-30',
+				duration: 0,
+			})
 			.to('#slider', { x: '100%', delay: 0.2 })
 			.to('#left-col', { x: 0, duration: 1 })
 			.to('.left-col-item', {
