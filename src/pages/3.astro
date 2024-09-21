@@ -141,62 +141,48 @@ import nathalieJolie2 from '@public/3/imgs/nathalie-jolie-2.jpg'
 <script>
 	import gsap from 'gsap'
 
-	const tl = gsap.timeline({
-		delay: 0.5,
-		defaults: { animation: 'power3.inOut' },
-	})
+	document.addEventListener('astro:page-load', () => {
+		if (window.location.pathname !== '/landing-pages/3/') return
 
-	tl.to('#loader-wrapper', {
-		scale: 1,
-	})
-		.to('#loader', { y: 0, scale: 1, duration: 1.5 }, '<')
-		.to('#loader-wrapper', {
-			scale: 1.5,
-			duration: 1,
+		const tl = gsap.timeline({
+			delay: 0.3,
+			defaults: { animation: 'power3.inOut' },
 		})
-		.to(
-			'#loader-container',
-			{
-				opacity: 0,
+
+		tl.to('#loader-wrapper', {
+			scale: 1,
+		})
+			.to('#loader', { y: 0, scale: 1, duration: 1.5 }, '<')
+			.to('#loader-wrapper', {
+				scale: 1.5,
 				duration: 1,
-				onComplete: () => remove('#loader-container'),
-			},
-			'<'
-		)
-		.to('#loader-title-container > h1 > span', {
-			x: 0,
-			opacity: 1,
-			duration: 1.2,
-			stagger: 0.1,
-		})
-		.to('#slider', {
-			x: 0,
-			onComplete: () => remove('#loader-title-container'),
-		})
-		.to('#slider', {
-			x: '100%',
-			delay: 0.2,
-			onComplete: () => remove('#slider'),
-		})
-		.to('#left-col', { x: 0, duration: 1 })
-		.to('.left-col-item', {
-			x: 0,
-			opacity: 1,
-			stagger: 0.2,
-			duration: 1.2,
-		})
-		.to(
-			'#right-col-title',
-			{
+			})
+			.to('#loader-container', { opacity: 0, duration: 1 }, '<')
+			.to('#loader-title-container > h1 > span', {
 				x: 0,
 				opacity: 1,
-				duration: 1.4,
-			},
-			'<'
-		)
-		.to('#back-to-home', { left: '1rem', duration: 1 })
-
-	function remove(selector: string) {
-		document.querySelector(selector)?.remove()
-	}
+				duration: 1.2,
+				stagger: 0.1,
+			})
+			.to('#slider', { x: 0 })
+			.to('#loader-title-container', { opacity: 0, duration: 0 })
+			.to('#slider', { x: '100%', delay: 0.2 })
+			.to('#left-col', { x: 0, duration: 1 })
+			.to('.left-col-item', {
+				x: 0,
+				opacity: 1,
+				stagger: 0.2,
+				duration: 1.2,
+			})
+			.to(
+				'#right-col-title',
+				{
+					x: 0,
+					opacity: 1,
+					duration: 1.4,
+				},
+				'<'
+			)
+			.to('#back-to-home', { left: '1rem', duration: 1 })
+	})
 </script>

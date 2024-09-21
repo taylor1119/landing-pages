@@ -152,35 +152,39 @@ const IMAGES = [
 <script>
 	import gsap from 'gsap'
 
-	const tl = gsap.timeline({
-		defaults: { duration: 1, ease: 'power3.out' },
-		delay: 0.5,
-	})
+	document.addEventListener('astro:page-load', () => {
+		if (window.location.pathname !== '/landing-pages/1/') return
 
-	tl.to('.letter', {
-		y: 0,
-		stagger: 0.1,
+		const tl = gsap.timeline({
+			delay: 0.3,
+			defaults: { duration: 1, ease: 'power3.out' },
+		})
+
+		tl.to('.letter', {
+			y: 0,
+			stagger: 0.1,
+		})
+			.to('.header', { columnGap: '20svw' })
+			.to(
+				'.main-img',
+				{ clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)' },
+				'<'
+			)
+			.to('.header-left', { fontSize: '12svw' })
+			.to('.header-right', { fontSize: '12svw' }, '<')
+			.to('.header', { columnGap: '4rem' }, '<')
+			.to('.main-img', { scale: 1 }, '<')
+			.to(
+				'.side-img',
+				{
+					clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
+					stagger: 0.1,
+				},
+				'<'
+			)
+			.to('.header', { y: 0, x: '50%', bottom: 0 }, '<')
+			.to('.img-title', { y: 0, opacity: 1, stagger: 0.1 }, '<')
+			.to('.nav-item', { opacity: 1, stagger: 0.2, delay: 0.5 }, '<')
+			.to('#back-to-home', { left: '1rem', duration: 1 })
 	})
-		.to('.header', { columnGap: '20svw' })
-		.to(
-			'.main-img',
-			{ clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)' },
-			'<'
-		)
-		.to('.header-left', { fontSize: '12svw' })
-		.to('.header-right', { fontSize: '12svw' }, '<')
-		.to('.header', { columnGap: '4rem' }, '<')
-		.to('.main-img', { scale: 1 }, '<')
-		.to(
-			'.side-img',
-			{
-				clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
-				stagger: 0.1,
-			},
-			'<'
-		)
-		.to('.header', { y: 0, x: '50%', bottom: 0 }, '<')
-		.to('.img-title', { y: 0, opacity: 1, stagger: 0.1 }, '<')
-		.to('.nav-item', { opacity: 1, stagger: 0.2, delay: 0.5 }, '<')
-		.to('#back-to-home', { left: '1rem', duration: 1 })
 </script>
